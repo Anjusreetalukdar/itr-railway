@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>ITR Railway Management</title> 
+  <style>
+  input[type="text"], input[type="date"], select {
+  width:98%;
+  }
+  body{
+            background-image: url('ITR.png');
+   background-position: center;
+   background-repeat: no-repeat;
+      background-size: 60%;
+      font-weight: bold; 
+  }
+  div{
+   margin-left: auto;
+   margin-right: auto;
+   text-align: center;
+   color: #FFFFFF;
+   font-size: 20px; 
+  }
+ 
+    h3{
+     /* Fill the attributes and values */
+     color: #FFFFFF;
+     background-color: #ff9966;
+     margin-right: auto;
+     margin-left: auto;
+     text-align: center;
+     width: 50%;
+     font-family: Verdana;
+     padding: 5px;
+     border-radius: 6px;
+    }
+  
+  table, td, tr{
+      border: solid 2px black;
+   /* Fill the attributes and values */
+   width: 50%;
+   margin-right: auto;
+   margin-left: auto;
+   border-spacing: 1px;
+   border-radius: 6px;
+   color: #FFFFFF;
+   background-color: transparent;
+   padding: 1px;
+  }
+
+  ::-webkit-input-placeholder { 
+   color: #696969;
+   font-weight: bold;
+  }
+  
+  #submit{
+   /* Fill the attributes and values */
+   color: #FFFFFF;
+   background-color: #ff9966;
+   margin-right: auto;
+   margin-left: auto;
+   padding: 5px;
+   width: 50%;
+   font-family: Verdana;
+   font-weight: bold;
+   border-radius: 6px;
+  }
+  #result{
+   /* Fill the attributes and values */
+   color: #00ff99;
+   font-size: 20px;
+   
+  }
+
+  </style>
+</head>
+<body>
+<div>
+<h3>ITR Railway Management</h3>
+<form onsubmit="return display()" >
+<table>
+ <tr>
+        <td>Passenger Name</td>
+        <td><input type="text" id="pname" placeholder="Enter the passenger name" required /></td>
+    </tr>
+ <tr>
+       <td>Phone Number</td>
+    <td><input type="text" id="phno" placeholder="Enter the phone number" required /></td>
+    </tr>
+ <tr>
+        <td>Ticket Id</td>
+        <td><input type="text" id="tid" placeholder="Enter the ticket id" required /></td>
+    </tr>
+ <tr>
+        <td>Date of Trip</td>
+        <td><input type="date" id="tripdate"  required /></td>
+    </tr>
+ <tr>
+        <td>Number of Tickets</td>
+        <td><input type="text" id="noOfTickets" placeholder="Enter the number of tickets" required /></td>
+    </tr>
+ <tr>
+        <td>Date of Cancellation</td>
+        <td><input type="date" id="cancellationdate"  required /></td>
+        
+    </tr>
+ <tr>
+  <td>Seat Type</td>
+  <td>
+      <select name="stype" id="stype">
+              <option value="Select Seat Type..">Select Seat Type..</option>
+              <option value="SecondSitting">SecondSitting</option>
+              <option value="Sleeper">Sleeper</option>
+              <option value="FirstClass">FirstClass</option>
+              <option value="ACFirstClass">ACFirstClass</option>
+            </select>
+  </td>
+ </tr>
+ <tr>
+        <td>Amount Paid</td>
+        <td><input type="text" id="amountPaid" placeholder="Enter the amount paid" required /></td>
+    </tr>
+</table>
+
+<p><input type="submit" id="submit" name="submit" value="CONFIRM CANCELLATION" /></p>
+
+<div id="result"> </div>
+</form>
+</div>
+<script>
+    function display(){
+  /* Fill  the Javascript code to display the refund amount */
+  var no = document.getElementById("noOfTickets").value;
+  var type = document.getElementById("stype").value;
+  var cf;
+  var cc;
+  var totalAmount;
+  var amt = document.getElementById("amountPaid").value;
+  
+  if(type=="SecondSitting")
+  {
+      cf = no*10;
+      cc = amt*0.3;
+  }
+  else if(type=="Sleeper")
+  {
+      cf = no*30;
+      cc = amt*0.4;
+  }
+  else if(type=="FirstClass")
+  {
+      cf = no * 50;
+      cc = amt * 0.5;
+  }
+  else if(type=="ACFirstClass")
+  {
+      cf = no*60;
+      cc = amt*0.5;
+  }
+  
+  totalAmount = amt - cf - cc;
+  totalAmount = Math.round(totalAmount);
+  
+     document.getElementById("result").innerHTML="Hi "+document.getElementById("pname").value+", Your ticket has been successfully canceled and the refund amount is Rs."+totalAmount;
+     return false;
+ }
+   
+</script>
+</body>
+</html>
